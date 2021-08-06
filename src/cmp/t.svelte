@@ -19,7 +19,7 @@
         {/each}
     </select>
 </div>
-<h4>{@html `${tc} &nbsp;  &#8805; &nbsp; ${tt} &nbsp;  ? &nbsp; `}<i class:no={s!='Ya'}>{s}</i></h4>
+<h4>{@html `t hitung : ${tc} &nbsp;  &#8805; &nbsp; t tabel : ${tt} &nbsp;  ? &nbsp; `}<i class:no={s!='Ya'}>{s}</i></h4>
 <hr>
 
 <h3>Kesimpulan</h3>
