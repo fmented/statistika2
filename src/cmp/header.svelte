@@ -6,7 +6,7 @@
     <a href="mailto:fmented@gmail.com"><b>📊 Statistika - Fauki</b></a>
 </header>
 {#if $INPUTDATA?.x?.length != $INPUTDATA?.y?.length}
-    <div>Error : length of input X and Y are unmatch !</div>
+    <div>Error : Jumlah X dan Y tidak sesuai !</div>
 {/if}
 <br>
 <style>
