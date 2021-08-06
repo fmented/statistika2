@@ -54,9 +54,11 @@ $: data = {
 $:data, update()
 
 $: if(c){
-    ch?ch.update() : ch = new Chart(c, config)
+    if(!ch) ch = new Chart(c, config)
 }
 </script>
 <h3>Graph</h3>
-<canvas bind:this="{c}"></canvas>
+<section>
+    <canvas bind:this="{c}"></canvas>
+</section>
 <br>

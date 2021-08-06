@@ -13,29 +13,32 @@
 </script>
 
 <h3>Regresi</h3>
-<div class="scrollable">
-
-    <p>
-        `b= (nsumXY-sumXsumY )/(n sumX^2-(sumX)^2)`
-    </p>
-    <p>
-        `b = ` <i>{b}</i>
-    </p>
-</div>
-<br>
-<div class="scrollable">
-
-    <p>
-        `a= (sumY-b sumX)/(n)`
-    </p>
-    <p>
-        `a = `<i>{a}</i>
-    </p>
-</div>
+<section>
+    <div class="scrollable">  
+        <p>
+            `b= (nsumXY-sumXsumY )/(n sumX^2-(sumX)^2)`
+        </p>
+        <p>
+            `b = ` <i>{b}</i>
+        </p>
+    </div>
+    <br>
+    <div class="scrollable">
+        
+        <p>
+            `a= (sumY-b sumX)/(n)`
+        </p>
+        <p>
+            `a = `<i>{a}</i>
+        </p>
+    </div>
+</section>
 <hr>
 
 <h3>Persamaan Regresi</h3>
-<Display label="Y original" data="{$INPUTDATA.y_mutated.map(v=>FORMULA.round(v))}"/>
-<br>
-<Display label="Y predicted" data="{$CHART.map(v=>FORMULA.round(v, 2))}"/>
+<section>
+    <Display label="Y original" data="{$INPUTDATA.y_mutated.map(v=>FORMULA.round(v))}"/>
+    <br>
+    <Display label="Y predicted" data="{$CHART.map(v=>FORMULA.round(v, 2))}"/>
+</section>
 <hr>

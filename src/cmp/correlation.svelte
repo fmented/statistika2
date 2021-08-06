@@ -16,8 +16,7 @@
     $:result, update()
 </script>
 <h3>Korelasi</h3>
-
-<div class="scrollable">
+<section class="scrollable">
 
     <p>
         `r = (n.sumXY- (sumX)(sumY))/
@@ -25,11 +24,11 @@
         <br>
         `r=`<i>{result}</i>
     </p>
-</div>
+</section>
 <hr>
 <Coeffetient/>
 <h3>KD</h3>
-<div class="scrollable">
+<section class="scrollable">
 
     <p>
         
@@ -37,27 +36,29 @@
         <br>
         `KD=`<i>{$RESULT.kd}%</i>
     </p>
-</div>
-    <hr>
-    <h3>Kontribusi</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Kontribusi</th>
-            <th>Eksternal</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <b>{[$RESULT.kd]}% &nbsp; ✔</b>
-            </td>
-            <td>
-                <b>{[FORMULA.round(100-$RESULT.kd)]}%</b>
-            </td>
-        </tr>
-    </tbody>
-</table>
+</section>
+<hr>
+<h3>Kontribusi</h3>
+<section>
+    <table>
+        <thead>
+            <tr>
+                <th>Kontribusi</th>
+                <th>Eksternal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <b>{[$RESULT.kd]}% &nbsp; ✔</b>
+                </td>
+                <td>
+                    <b>{[FORMULA.round(100-$RESULT.kd)]}%</b>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 <hr>
 <style>
        table, tr{

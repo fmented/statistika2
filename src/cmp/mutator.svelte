@@ -20,9 +20,11 @@
 <input type="number" id="mutator" bind:value="{val}">
 <br>
 <h5>Result</h5>
-<Display label="X" data="{$INPUTDATA.x_mutated}"/>
-<br>
-<Display label="Y" data="{$INPUTDATA.y_mutated}"/>
+<section>
+    <Display label="X" data="{$INPUTDATA.x_mutated}"/>
+    <br>
+    <Display label="Y" data="{$INPUTDATA.y_mutated}"/>
+</section>
 <hr>
 
 <style>

@@ -8,11 +8,13 @@
 <div>
 
 <h3>Statement</h3>
-<label for="ho">Ho</label>
-<input type="text" id="ho" bind:value="{ho}">
-
-<label for="ha">Ha</label>
-<input type="text" id="ha" bind:value="{ha}">
+<section>
+    <label for="ho">Ho</label>
+    <input type="text" id="ho" bind:value="{ho}">
+    
+    <label for="ha">Ha</label>
+    <input type="text" id="ha" bind:value="{ha}">
+</section>
 </div>
 <hr>
 <style>

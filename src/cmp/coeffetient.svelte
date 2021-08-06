@@ -25,20 +25,22 @@
         $: state = intv.filter(v=>$RESULT.correlation>=v.min && $RESULT.correlation<=v.max)[0]
 </script>
 <h3>Koefesien</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Interval</th>
-            <th>Relasi</th>
-        </tr>
-        {#each intv as i}
+<section>
+    <table>
+        <thead>
+            <tr>
+                <th>Interval</th>
+                <th>Relasi</th>
+            </tr>
+            {#each intv as i}
             <tr class:strike={i.name!=state?.name}>
                 <td >{`${i.min} - ${i.max}`}</td>
                 <td >{i.name}</td>
             </tr>
-        {/each}
-    </thead>
-</table>
+            {/each}
+        </thead>
+    </table>
+</section>
 <hr>
 <style>
     .strike{

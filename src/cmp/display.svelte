@@ -1,14 +1,10 @@
 <script>
-
-
     export let data = []
     export let label = ""
     export let count = false
 </script>
 
 <div>
-
-
 <table>
     <tr>
         <th>{label}</th>

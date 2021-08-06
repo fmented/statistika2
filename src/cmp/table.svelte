@@ -33,50 +33,52 @@
 
 </script>
 <h3>Table</h3>
-<table>
-    <tr>
-        <th>No.</th>
-        {#each Array(x.length) as _, i}
+<section>
+    <table>
+        <tr>
+            <th>No.</th>
+            {#each Array(x.length) as _, i}
             <td>{i+1}</td>
-        {/each}
-        <th>SUM</th>
-    </tr>
-    <tr>
-        <th>X</th>
-        {#each x as i }
+            {/each}
+            <th>SUM</th>
+        </tr>
+        <tr>
+            <th>X</th>
+            {#each x as i }
             <td>{i}</td>
-        {/each}
-        <td><b>{sum_x}</b></td>
-    </tr>
-    <tr>
-        <th>Y</th>
-        {#each y as i }
+            {/each}
+            <td><b>{sum_x}</b></td>
+        </tr>
+        <tr>
+            <th>Y</th>
+            {#each y as i }
             <td>{i}</td>
-        {/each}
-        <td><b>{sum_y}</b></td>
-    </tr>
-    <tr>
-        <th>X<sup>2</sup></th>
-        {#each x2 as i }
+            {/each}
+            <td><b>{sum_y}</b></td>
+        </tr>
+        <tr>
+            <th>X<sup>2</sup></th>
+            {#each x2 as i }
             <td>{i}</td>
-        {/each}
-        <td><b>{sum_x2}</b></td>
-    </tr>
-    <tr>
-        <th>Y<sup>2</sup></th>
-        {#each y2 as i }
+            {/each}
+            <td><b>{sum_x2}</b></td>
+        </tr>
+        <tr>
+            <th>Y<sup>2</sup></th>
+            {#each y2 as i }
             <td>{i}</td>
-        {/each}
-        <td><b>{sum_y2}</b></td>
-    </tr>
-    <tr>
-        <th>XY</th>
-        {#each xy as i }
+            {/each}
+            <td><b>{sum_y2}</b></td>
+        </tr>
+        <tr>
+            <th>XY</th>
+            {#each xy as i }
             <td>{i}</td>
-        {/each}
-        <td><b>{sum_xy}</b></td>
-    </tr>
-</table>
+            {/each}
+            <td><b>{sum_xy}</b></td>
+        </tr>
+    </table>
+</section>
 <hr>
 <style>
     table, tr{
