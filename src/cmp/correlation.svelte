@@ -15,7 +15,7 @@
         )
     $:result, update()
 </script>
-<h3>Correlation</h3>
+<h3>Korelasi</h3>
 
 <div class="scrollable">
 
@@ -44,13 +44,13 @@
     <thead>
         <tr>
             <th>Influence</th>
-            <th>Non-Influence</th>
+            <th>External</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-                <b>{[$RESULT.kd]}%</b>
+                <b>{[$RESULT.kd]}% &nbsp; ✔</b>
             </td>
             <td>
                 <b>{[FORMULA.round(100-$RESULT.kd)]}%</b>

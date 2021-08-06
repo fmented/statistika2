@@ -1,28 +1,28 @@
 <script>
     import { FORMULA, STATEMENT, CALCULATED, RESULT } from "../store";
-    let p = 5
+    export let p = 2
     $: tc = FORMULA.t_count($RESULT.correlation, $CALCULATED.n)
     $: tt = FORMULA.t_table($CALCULATED.n, p)
 
     $: c = tc>=tt? $STATEMENT.ha : $STATEMENT.ho
-    $: s = tc>=tt? 'Yes' : 'No'
+    $: s = tc>=tt? 'Ya' : 'Tidak'
     const prct = [25, 20, 15, 10, 5, 2.5, 2, 1, 0.5]
     
 </script>
 
-<h3>T Comparison</h3>
+<h3>Perbandingan T</h3>
 <div class="flx">
-    <label for="prct">Percentage</label>
+    <label for="prct">Alpha</label>
     <select id="prct" bind:value="{p}">
         {#each prct as pr}
         <option value="{pr}" >{pr}%</option>
         {/each}
     </select>
 </div>
-<h4>{@html `${tc} &nbsp;  &#8805; &nbsp; ${tt} &nbsp;  ? &nbsp; `}<i class:no={s=='No'}>{s}</i></h4>
+<h4>{@html `${tc} &nbsp;  &#8805; &nbsp; ${tt} &nbsp;  ? &nbsp; `}<i class:no={s!='Ya'}>{s}</i></h4>
 <hr>
 
-<h3>Conclusion</h3>
+<h3>Kesimpulan</h3>
 <div class="scrollable">
     <h5>{c}</h5>
 </div>

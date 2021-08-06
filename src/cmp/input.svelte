@@ -2,7 +2,7 @@
     import {INPUTDATA, MUTATOR} from '../store'
     import Display from './display.svelte'
     export let label = ""
-
+    export let variable = ""
     function update(d) {
         let storevalue = $INPUTDATA
         storevalue[label] = d.map(v=>Number(v))
@@ -14,7 +14,7 @@
     $: data = inp.replace(' ', '').split(',').filter(v=>v!='')
     $: update(data)
 </script>
-<label for="{label}">{`Input for variable ${label.toUpperCase()}`}</label>
+<label for="{label}">{variable}</label>
 <textarea id={label} rows="5" bind:value="{inp}" ></textarea>
 
 <Display label={label.toUpperCase()} {data} count="{true}"/>

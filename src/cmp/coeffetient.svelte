@@ -3,33 +3,33 @@
     const intv = [
         {   min:.80,
             max:1.0,
-            name: 'Very Strong'
+            name: 'Sangat Kuat'
         },
         {   min:.60,
             max:.79,
-            name: 'Strong'
+            name: 'Kuat'
         },
         {   min:.40,
             max:.59,
-            name: 'Strong Enough'
+            name: 'Cukup Kuat'
         },
         {   min:.20,
             max:.39,
-            name: 'Weak'
+            name: 'Lemah'
         },
         {   min:.0,
             max:.19,
-            name: 'Very Weak'
+            name: 'Sangat Lemah'
         }
         ]
         $: state = intv.filter(v=>$RESULT.correlation>=v.min && $RESULT.correlation<=v.max)[0]
 </script>
-<h3>Coeffetient</h3>
+<h3>Koefesien</h3>
 <table>
     <thead>
         <tr>
             <th>Interval</th>
-            <th>Relation</th>
+            <th>Relasi</th>
         </tr>
         {#each intv as i}
             <tr class:strike={i.name!=state?.name}>

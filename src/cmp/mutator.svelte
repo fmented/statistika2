@@ -16,7 +16,7 @@
 </script>
 <hr>
 <br>
-<label for="mutator">Mutator</label>
+<label for="mutator">NIM Terakhir</label>
 <input type="number" id="mutator" bind:value="{val}">
 <br>
 <h5>Result</h5>

@@ -12,7 +12,7 @@
 
 </script>
 
-<h3>Regression</h3>
+<h3>Regresi</h3>
 <div class="scrollable">
 
     <p>
@@ -34,7 +34,7 @@
 </div>
 <hr>
 
-<h3>Y Regression</h3>
+<h3>Persamaan Regresi</h3>
 <Display label="Y original" data="{$INPUTDATA.y_mutated.map(v=>FORMULA.round(v))}"/>
 <br>
 <Display label="Y predicted" data="{$CHART.map(v=>FORMULA.round(v, 2))}"/>
