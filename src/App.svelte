@@ -41,6 +41,9 @@
 	:global(body){
 		padding: 0;
 	}
+	:global(input, select, textarea){
+		border-radius: 8px;
+	}
 	footer{
 		background-color: #eee;
 		text-align: right;
@@ -50,4 +53,5 @@
 		margin-right: 12px;	
 		font-size: xx-small;
 	}
+
 </style>

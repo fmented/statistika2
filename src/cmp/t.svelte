@@ -1,5 +1,6 @@
 <script>
     import { FORMULA, STATEMENT, CALCULATED, RESULT } from "../store";
+    import { blur} from "svelte/transition";
     export let p = 2
     $: tc = FORMULA.t_count($RESULT.correlation, $CALCULATED.n)
     $: tt = FORMULA.t_table($CALCULATED.n, p)
@@ -25,12 +26,16 @@
         <i class="big">{tc} </i>
         <b class="bigger">&nbsp; &#8805; &nbsp;</b>
         <b>t_tabel :</b>
-        <i class="big">{tt}</i>
+        {#key tt}
+        <i class="big" in:blur={{duration:666, }}>{tt}</i>
+        {/key}
         <b class="big">&nbsp; ?</b>
     </h4>
-    <h4>
-        <i class:no={s=='Tidak'} class:yes={s=='Ya'}>{s} &nbsp;</i>
-        <b class="big">{s=='Ya'?'| Terima Ha':'| Terima Ho'}</b>
+    <h4 in:blur={{duration:666, }}>
+        {#key s}
+        <i class:no={s=='Tidak'} class:yes={s=='Ya'}>{s}</i>
+        <b class="big" >{s=='Ya'?'| Terima Ha':'| Terima Ho'}</b>
+        {/key}
     </h4>
 </section>
 <hr>
@@ -38,7 +43,9 @@
 <h3>Kesimpulan</h3>
 <section>
     <div class="scrollable">
-        <h5>{c}</h5>
+        {#key c}      
+        <h5 in:blur={{duration:666, }}>{c}</h5>
+        {/key}
     </div>
 </section>
 <hr>

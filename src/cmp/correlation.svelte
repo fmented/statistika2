@@ -1,7 +1,7 @@
 <script>
     import {CALCULATED, FORMULA, RESULT} from '../store'
     import Coeffetient from './coeffetient.svelte'
-
+    import { blur } from "svelte/transition";
     function update() {
         let r = $RESULT
         r.correlation = result
@@ -16,30 +16,34 @@
     $:result, update()
 </script>
 <h3>Korelasi</h3>
+{#key result}
 <section class="scrollable">
 
     <p>
         `r = (n.sumXY- (sumX)(sumY))/
         sqrt((n.sumX^2-(sumX)^2)-(n.sumY^2-(sumY)^2))`
         <br>
-        `r=`<i>{result}</i>
+        `r=`<i in:blur={{duration:666, }}>{result}</i>
     </p>
 </section>
+{/key}
 <hr>
 <Coeffetient/>
 <h3>KD</h3>
+{#key $RESULT.kd}
 <section class="scrollable">
 
     <p>
         
         `KD=r^2 * 100`
         <br>
-        `KD=`<i>{$RESULT.kd}%</i>
+        `KD=`<i in:blur={{duration:666, }}>{$RESULT.kd}%</i>
     </p>
 </section>
 <hr>
 <h3>Kontribusi</h3>
 <section>
+
     <table>
         <thead>
             <tr>
@@ -50,15 +54,16 @@
         <tbody>
             <tr>
                 <td>
-                    <b>{[$RESULT.kd]}% &nbsp; ✔</b>
+                    <b in:blur={{duration:666, }}>{[$RESULT.kd]}% &nbsp; ✔</b>
                 </td>
                 <td>
-                    <b>{[FORMULA.round(100-$RESULT.kd)]}%</b>
+                    <b in:blur={{duration:666, }}>{[FORMULA.round(100-$RESULT.kd)]}%</b>
                 </td>
             </tr>
         </tbody>
     </table>
 </section>
+{/key}
 <hr>
 <style>
        table, tr{
@@ -68,6 +73,7 @@
     table{
         border-collapse: collapse;
         overflow-x: scroll;
+        border-radius: 8px;
     }
     
     tr>*{

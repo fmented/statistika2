@@ -1,7 +1,11 @@
 <script>
     import {INPUTDATA, FORMULA, CALCULATED} from '../store'
     import {onMount} from 'svelte'
-    onMount(()=>update())
+    import { blur, slide } from "svelte/transition";
+    onMount(()=>{
+        update()
+    })
+
     let sum = FORMULA.sum
 
     $: x = $INPUTDATA.x_mutated 
@@ -34,71 +38,139 @@
 </script>
 <h3>Table</h3>
 <section>
-    <table>
+<table class="head">
+    <tr>
+        <td>No.</td>
+    </tr>
+    <tr>
+        <td>X</td>
+    </tr>
+    <tr>
+        <td>Y</td>
+    </tr>
+    <tr>
+        <td>X²</td>
+    </tr>
+    <tr>
+        <td>Y²</td>
+    </tr>
+    <tr>
+        <td>XY</td>
+    </tr>
+</table>
+<table class="main" in:slide={{duration:666}}>
         <tr>
-            <th>No.</th>
             {#each Array(x.length) as _, i}
             <td>{i+1}</td>
             {/each}
-            <th>SUM</th>
         </tr>
-        <tr>
-            <th>X</th>
+        <tr>  
             {#each x as i }
             <td>{i}</td>
             {/each}
-            <td><b>{sum_x}</b></td>
         </tr>
-        <tr>
-            <th>Y</th>
+        <tr>  
             {#each y as i }
             <td>{i}</td>
             {/each}
-            <td><b>{sum_y}</b></td>
         </tr>
         <tr>
-            <th>X<sup>2</sup></th>
             {#each x2 as i }
             <td>{i}</td>
             {/each}
-            <td><b>{sum_x2}</b></td>
         </tr>
         <tr>
-            <th>Y<sup>2</sup></th>
             {#each y2 as i }
             <td>{i}</td>
             {/each}
-            <td><b>{sum_y2}</b></td>
         </tr>
         <tr>
-            <th>XY</th>
             {#each xy as i }
             <td>{i}</td>
             {/each}
-            <td><b>{sum_xy}</b></td>
         </tr>
-    </table>
+</table>
+<table class="result">
+    <tr>
+        <td style="{x.length%2==0?'background:#c2c2c2':'background:#4272f2'}"><b>SUM</b></td>
+    </tr>
+    <tr>
+        {#key sum_x}    
+        <td style="{x.length%2==0?'background:#c2c2c2':'background:#4272f2'}">
+            <b in:blur={{duration:666}}>{sum_x}</b>
+        </td>
+        {/key}
+    </tr>
+    <tr>
+        {#key sum_y}   
+        <td style="{x.length%2==0?'background:#c2c2c2':'background:#4272f2'}">
+            <b in:blur={{duration:666}}>{sum_y}</b>
+        </td>
+        {/key}
+    </tr>
+    <tr>
+        {#key sum_x2}   
+        <td style="{x.length%2==0?'background:#c2c2c2':'background:#4272f2'}">
+            <b in:blur={{duration:666}}>{sum_x2}</b>
+        </td>
+        {/key}
+    </tr>
+    <tr>
+        {#key sum_y2}
+            
+        <td style="{x.length%2==0?'background:#c2c2c2':'background:#4272f2'}">
+            <b in:blur={{duration:666}}>{sum_y2}</b>
+        </td>
+        {/key}
+    </tr>
+    <tr>
+        {#key sum_xy}
+            
+        <td style="{x.length%2==0?'background:#c2c2c2':'background:#4272f2'}">
+            <b in:blur={{duration:666}}>{sum_xy}</b>
+        </td>
+        {/key}
+    </tr>
+</table>
+    
 </section>
 <hr>
 <style>
-    table, tr{
-        border: 1px solid black;
+
+    .main tr>*{
+        background: #2272ff;
+        text-align: center;
+        padding: 8px 24px;
     }
 
-    table{
-        border-collapse: collapse;
+    
+    .main tr>*:nth-child(odd){
+        background-color: #f2f2f2;
+        }
+
+    section{
+        display: flex;
+        position: relative;
+        align-items: center;
+    }
+
+    table.main{
         overflow-x: auto;
         display: block;
     }
-    
-    tr>*{
-        width: 1%;
-        background: #2272ff;
+
+    .head td, .result td{
+        padding: 8px 24px;
+        font-weight: bolder;
         text-align: center;
     }
-    tr>th:first-of-type{
-        text-align: left;
-        padding-left: .5em;
+    .result td{
+        padding: 8px 12px;
     }
-    tr>*:nth-child(even){background-color: #f2f2f2;}
+
+    .head td{
+        background-color: #4272f2;
+    }
+
+
 </style>

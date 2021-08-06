@@ -1,5 +1,6 @@
 <script>
     import { RESULT } from "../store";
+    import { blur } from "svelte/transition";
     const intv = [
         {   min:.80,
             max:1.0,
@@ -25,6 +26,7 @@
         $: state = intv.filter(v=>$RESULT.correlation>=v.min && $RESULT.correlation<=v.max)[0]
 </script>
 <h3>Koefesien</h3>
+{#key state}
 <section>
     <table>
         <thead>
@@ -33,14 +35,16 @@
                 <th>Relasi</th>
             </tr>
             {#each intv as i}
-            <tr class:strike={i.name!=state?.name}>
-                <td >{`${i.min} - ${i.max}`}</td>
-                <td >{i.name}</td>
+            <tr class:strike={i.name!=state?.name} transition:blur={{duration:666}}>
+                <td>{`${i.min} - ${i.max}`}</td>
+                <td>{i.name}</td>
             </tr>
             {/each}
         </thead>
     </table>
 </section>
+    
+{/key}
 <hr>
 <style>
     .strike{
@@ -54,6 +58,7 @@
     table{
         border-collapse: collapse;
         overflow-x: scroll;
+        border-radius: 8px;
     }
     
     tr>*{

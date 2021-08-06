@@ -1,12 +1,29 @@
 
 <script>
     import { INPUTDATA } from "../store";
+    import { fly, blur } from "svelte/transition";
+    function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+    let el
+    let x=true
+    document.onscroll = ()=> x=isInViewport(el)
 </script>
-<header>
+<header class:bounce={x} bind:this="{el}">
     <a href="mailto:fmented@gmail.com"><b>📊 Statistika - Fauki</b></a>
 </header>
 {#if $INPUTDATA?.x?.length != $INPUTDATA?.y?.length}
-    <div>Error : Jumlah X dan Y tidak sesuai !</div>
+    <div in:fly={{duration:666}} out:blur={{duration:666}}>
+       <strong>
+           Error : Jumlah X dan Y tidak sesuai !
+       </strong> 
+    </div>
 {/if}
 <br>
 <style>
@@ -18,6 +35,8 @@
         height: 2.5rem;
         display: flex;
         align-items: center;
+        animation-duration: 2s;
+        animation-fill-mode: both;
     }
     b{
         margin: 8px;
@@ -30,4 +49,18 @@
         font-weight: bold;
         border-radius: 4px;
     }
+    strong{
+        margin-left: 1rem;
+    }
+    @keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+            40% {transform: translateY(-30px);} 
+            60% {transform: translateY(-15px);} 
+         }
+         
+         .bounce { 
+            -webkit-animation-name: bounce; 
+            animation-name: bounce; 
+         }
+
 </style>
