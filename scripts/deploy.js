@@ -1,27 +1,16 @@
-/* eslint-disable no-console */
-const execa = require("execa");
-const fs = require("fs");
-(async () => {
-  try {
-    await execa("git", ["checkout", "--orphan", "gh-pages"]);
-    // eslint-disable-next-line no-console
-    console.log("Building started...");
-    await execa("npm", ["run", "build"]);
-    // await execa("yarn", ["build"]);
-    // Understand if it's dist or build folder
-    const folderName = fs.existsSync("dist") ? "dist" : "build";
-    await execa("git", ["--work-tree='build'", "checkout", "master"]);
-    await execa("git", ["--work-tree", folderName, "add", "--all"]);
-    await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);
-    console.log("Pushing to gh-pages...");
-    await execa("git", ["push", "origin", "HEAD:gh-pages", "--force"]);
-    await execa("rm", ["-r", folderName]);
-    await execa("git", ["checkout", "-f", "main"]);
-    await execa("git", ["branch", "-D", "gh-pages"]);
-    console.log("Successfully deployed, check your settings");
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(e.message);
-    process.exit(1);
-  }
-})();
+var ghpages = require('gh-pages');
+
+ghpages.publish(
+    'public', // path to public directory
+    {
+        branch: 'gh-pages',
+        repo: 'https://github.com/fmented/statistika2.git', // Update to point to your repository  
+        user: {
+            name: 'fmented', // update to use your name
+            email: 'fmented@gmail.com' // Update to use your email
+        }
+    },
+    () => {
+        console.log('Deploy Complete!')
+    }
+)
