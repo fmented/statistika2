@@ -39,12 +39,12 @@
     </p>
 </div>
     <hr>
-    <h3>Influence</h3>
+    <h3>Kontribusi</h3>
 <table>
     <thead>
         <tr>
-            <th>Influence</th>
-            <th>External</th>
+            <th>Kontribusi</th>
+            <th>Eksternal</th>
         </tr>
     </thead>
     <tbody>

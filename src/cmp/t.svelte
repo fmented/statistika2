@@ -10,9 +10,9 @@
     
 </script>
 
-<h3>Perbandingan T</h3>
+<h3>Signifikansi</h3>
 <div class="flx">
-    <label for="prct">Alpha</label>
+    <label for="prct">Nilai Alpha : </label>
     <select id="prct" bind:value="{p}">
         {#each prct as pr}
         <option value="{pr}" >{pr}%</option>
