@@ -1295,7 +1295,6 @@ var app = (function () {
 
     function create_fragment$a(ctx) {
     	let label_1;
-    	let t0_value = `Input for variable ${/*label*/ ctx[1].toUpperCase()}` + "";
     	let t0;
     	let t1;
     	let textarea;
@@ -1308,7 +1307,7 @@ var app = (function () {
     	display = new Display({
     			props: {
     				label: /*label*/ ctx[1].toUpperCase(),
-    				data: /*data*/ ctx[2],
+    				data: /*data*/ ctx[3],
     				count: true
     			},
     			$$inline: true
@@ -1317,18 +1316,18 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			label_1 = element("label");
-    			t0 = text(t0_value);
+    			t0 = text(/*variable*/ ctx[2]);
     			t1 = space();
     			textarea = element("textarea");
     			t2 = space();
     			create_component(display.$$.fragment);
     			attr_dev(label_1, "for", /*label*/ ctx[1]);
     			attr_dev(label_1, "class", "svelte-1u17c7n");
-    			add_location(label_1, file$a, 16, 0, 483);
+    			add_location(label_1, file$a, 16, 0, 511);
     			attr_dev(textarea, "id", /*label*/ ctx[1]);
     			attr_dev(textarea, "rows", "5");
     			attr_dev(textarea, "class", "svelte-1u17c7n");
-    			add_location(textarea, file$a, 17, 0, 559);
+    			add_location(textarea, file$a, 17, 0, 552);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1344,12 +1343,12 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[3]);
+    				dispose = listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[4]);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if ((!current || dirty & /*label*/ 2) && t0_value !== (t0_value = `Input for variable ${/*label*/ ctx[1].toUpperCase()}` + "")) set_data_dev(t0, t0_value);
+    			if (!current || dirty & /*variable*/ 4) set_data_dev(t0, /*variable*/ ctx[2]);
 
     			if (!current || dirty & /*label*/ 2) {
     				attr_dev(label_1, "for", /*label*/ ctx[1]);
@@ -1365,7 +1364,7 @@ var app = (function () {
 
     			const display_changes = {};
     			if (dirty & /*label*/ 2) display_changes.label = /*label*/ ctx[1].toUpperCase();
-    			if (dirty & /*data*/ 4) display_changes.data = /*data*/ ctx[2];
+    			if (dirty & /*data*/ 8) display_changes.data = /*data*/ ctx[3];
     			display.$set(display_changes);
     		},
     		i: function intro(local) {
@@ -1404,12 +1403,13 @@ var app = (function () {
     	let $MUTATOR;
     	let $INPUTDATA;
     	validate_store(MUTATOR, 'MUTATOR');
-    	component_subscribe($$self, MUTATOR, $$value => $$invalidate(4, $MUTATOR = $$value));
+    	component_subscribe($$self, MUTATOR, $$value => $$invalidate(5, $MUTATOR = $$value));
     	validate_store(INPUTDATA, 'INPUTDATA');
-    	component_subscribe($$self, INPUTDATA, $$value => $$invalidate(5, $INPUTDATA = $$value));
+    	component_subscribe($$self, INPUTDATA, $$value => $$invalidate(6, $INPUTDATA = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Input', slots, []);
     	let { label = "" } = $$props;
+    	let { variable = "" } = $$props;
 
     	function update(d) {
     		let storevalue = $INPUTDATA;
@@ -1419,7 +1419,7 @@ var app = (function () {
     	}
 
     	let { inp = "1,7,9" } = $$props;
-    	const writable_props = ['label', 'inp'];
+    	const writable_props = ['label', 'variable', 'inp'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Input> was created with unknown prop '${key}'`);
@@ -1432,6 +1432,7 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ('label' in $$props) $$invalidate(1, label = $$props.label);
+    		if ('variable' in $$props) $$invalidate(2, variable = $$props.variable);
     		if ('inp' in $$props) $$invalidate(0, inp = $$props.inp);
     	};
 
@@ -1440,6 +1441,7 @@ var app = (function () {
     		MUTATOR,
     		Display,
     		label,
+    		variable,
     		update,
     		inp,
     		data,
@@ -1449,8 +1451,9 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ('label' in $$props) $$invalidate(1, label = $$props.label);
+    		if ('variable' in $$props) $$invalidate(2, variable = $$props.variable);
     		if ('inp' in $$props) $$invalidate(0, inp = $$props.inp);
-    		if ('data' in $$props) $$invalidate(2, data = $$props.data);
+    		if ('data' in $$props) $$invalidate(3, data = $$props.data);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1459,21 +1462,21 @@ var app = (function () {
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*inp*/ 1) {
-    			$$invalidate(2, data = inp.replace(' ', '').split(',').filter(v => v != ''));
+    			$$invalidate(3, data = inp.replace(' ', '').split(',').filter(v => v != ''));
     		}
 
-    		if ($$self.$$.dirty & /*data*/ 4) {
+    		if ($$self.$$.dirty & /*data*/ 8) {
     			update(data);
     		}
     	};
 
-    	return [inp, label, data, textarea_input_handler];
+    	return [inp, label, variable, data, textarea_input_handler];
     }
 
     class Input extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { label: 1, inp: 0 });
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { label: 1, variable: 2, inp: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -1488,6 +1491,14 @@ var app = (function () {
     	}
 
     	set label(value) {
+    		throw new Error("<Input>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get variable() {
+    		throw new Error("<Input>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set variable(value) {
     		throw new Error("<Input>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -1552,7 +1563,7 @@ var app = (function () {
     			br0 = element("br");
     			t1 = space();
     			label = element("label");
-    			label.textContent = "Mutator";
+    			label.textContent = "NIM Terakhir";
     			t3 = space();
     			input = element("input");
     			t4 = space();
@@ -1576,11 +1587,11 @@ var app = (function () {
     			attr_dev(input, "type", "number");
     			attr_dev(input, "id", "mutator");
     			attr_dev(input, "class", "svelte-ylyywh");
-    			add_location(input, file$9, 19, 0, 518);
-    			add_location(br1, file$9, 20, 0, 573);
-    			add_location(h5, file$9, 21, 0, 579);
-    			add_location(br2, file$9, 23, 0, 648);
-    			add_location(hr1, file$9, 25, 0, 706);
+    			add_location(input, file$9, 19, 0, 523);
+    			add_location(br1, file$9, 20, 0, 578);
+    			add_location(h5, file$9, 21, 0, 584);
+    			add_location(br2, file$9, 23, 0, 653);
+    			add_location(hr1, file$9, 25, 0, 711);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2885,12 +2896,12 @@ var app = (function () {
     			t2 = text(t2_value);
     			t3 = space();
     			attr_dev(td0, "class", "svelte-1nbwu1r");
-    			add_location(td0, file$6, 35, 16, 850);
+    			add_location(td0, file$6, 35, 16, 845);
     			attr_dev(td1, "class", "svelte-1nbwu1r");
-    			add_location(td1, file$6, 36, 16, 901);
+    			add_location(td1, file$6, 36, 16, 896);
     			attr_dev(tr, "class", "svelte-1nbwu1r");
     			toggle_class(tr, "strike", /*i*/ ctx[3].name != /*state*/ ctx[0]?.name);
-    			add_location(tr, file$6, 34, 12, 793);
+    			add_location(tr, file$6, 34, 12, 788);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -2945,7 +2956,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			h3 = element("h3");
-    			h3.textContent = "Coeffetient";
+    			h3.textContent = "Koefesien";
     			t1 = space();
     			table = element("table");
     			thead = element("thead");
@@ -2954,7 +2965,7 @@ var app = (function () {
     			th0.textContent = "Interval";
     			t3 = space();
     			th1 = element("th");
-    			th1.textContent = "Relation";
+    			th1.textContent = "Relasi";
     			t5 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -2963,17 +2974,17 @@ var app = (function () {
 
     			t6 = space();
     			hr = element("hr");
-    			add_location(h3, file$6, 26, 0, 619);
+    			add_location(h3, file$6, 26, 0, 618);
     			attr_dev(th0, "class", "svelte-1nbwu1r");
-    			add_location(th0, file$6, 30, 12, 689);
+    			add_location(th0, file$6, 30, 12, 686);
     			attr_dev(th1, "class", "svelte-1nbwu1r");
-    			add_location(th1, file$6, 31, 12, 720);
+    			add_location(th1, file$6, 31, 12, 717);
     			attr_dev(tr, "class", "svelte-1nbwu1r");
-    			add_location(tr, file$6, 29, 8, 671);
-    			add_location(thead, file$6, 28, 4, 654);
+    			add_location(tr, file$6, 29, 8, 668);
+    			add_location(thead, file$6, 28, 4, 651);
     			attr_dev(table, "class", "svelte-1nbwu1r");
-    			add_location(table, file$6, 27, 0, 641);
-    			add_location(hr, file$6, 41, 0, 981);
+    			add_location(table, file$6, 27, 0, 638);
+    			add_location(hr, file$6, 41, 0, 976);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3053,15 +3064,11 @@ var app = (function () {
     	validate_slots('Coeffetient', slots, []);
 
     	const intv = [
-    		{ min: .80, max: 1.0, name: 'Very Strong' },
-    		{ min: .60, max: .79, name: 'Strong' },
-    		{
-    			min: .40,
-    			max: .59,
-    			name: 'Strong Enough'
-    		},
-    		{ min: .20, max: .39, name: 'Weak' },
-    		{ min: .0, max: .19, name: 'Very Weak' }
+    		{ min: .80, max: 1.0, name: 'Sangat Kuat' },
+    		{ min: .60, max: .79, name: 'Kuat' },
+    		{ min: .40, max: .59, name: 'Cukup Kuat' },
+    		{ min: .20, max: .39, name: 'Lemah' },
+    		{ min: .0, max: .19, name: 'Sangat Lemah' }
     	];
 
     	const writable_props = [];
@@ -3165,7 +3172,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			h30 = element("h3");
-    			h30.textContent = "Correlation";
+    			h30.textContent = "Korelasi";
     			t1 = space();
     			div0 = element("div");
     			p0 = element("p");
@@ -3203,14 +3210,14 @@ var app = (function () {
     			th0.textContent = "Influence";
     			t19 = space();
     			th1 = element("th");
-    			th1.textContent = "Non-Influence";
+    			th1.textContent = "External";
     			t21 = space();
     			tbody = element("tbody");
     			tr1 = element("tr");
     			td0 = element("td");
     			b0 = element("b");
     			t22 = text(t22_value);
-    			t23 = text("%");
+    			t23 = text("%   ✔");
     			t24 = space();
     			td1 = element("td");
     			b1 = element("b");
@@ -3219,39 +3226,39 @@ var app = (function () {
     			t27 = space();
     			hr2 = element("hr");
     			add_location(h30, file$5, 17, 0, 492);
-    			add_location(br0, file$5, 24, 8, 656);
-    			add_location(i0, file$5, 25, 12, 674);
-    			add_location(p0, file$5, 21, 4, 548);
+    			add_location(br0, file$5, 24, 8, 653);
+    			add_location(i0, file$5, 25, 12, 671);
+    			add_location(p0, file$5, 21, 4, 545);
     			attr_dev(div0, "class", "scrollable");
-    			add_location(div0, file$5, 19, 0, 516);
-    			add_location(hr0, file$5, 28, 0, 709);
-    			add_location(h31, file$5, 30, 0, 731);
-    			add_location(br1, file$5, 36, 8, 823);
-    			add_location(i1, file$5, 37, 13, 842);
-    			add_location(p1, file$5, 33, 4, 776);
+    			add_location(div0, file$5, 19, 0, 513);
+    			add_location(hr0, file$5, 28, 0, 706);
+    			add_location(h31, file$5, 30, 0, 728);
+    			add_location(br1, file$5, 36, 8, 820);
+    			add_location(i1, file$5, 37, 13, 839);
+    			add_location(p1, file$5, 33, 4, 773);
     			attr_dev(div1, "class", "scrollable");
-    			add_location(div1, file$5, 31, 0, 744);
-    			add_location(hr1, file$5, 40, 4, 886);
-    			add_location(h32, file$5, 41, 4, 896);
+    			add_location(div1, file$5, 31, 0, 741);
+    			add_location(hr1, file$5, 40, 4, 883);
+    			add_location(h32, file$5, 41, 4, 893);
     			attr_dev(th0, "class", "svelte-kqzxl8");
-    			add_location(th0, file$5, 45, 12, 964);
+    			add_location(th0, file$5, 45, 12, 961);
     			attr_dev(th1, "class", "svelte-kqzxl8");
-    			add_location(th1, file$5, 46, 12, 996);
+    			add_location(th1, file$5, 46, 12, 993);
     			attr_dev(tr0, "class", "svelte-kqzxl8");
-    			add_location(tr0, file$5, 44, 8, 946);
-    			add_location(thead, file$5, 43, 4, 929);
-    			add_location(b0, file$5, 52, 16, 1110);
+    			add_location(tr0, file$5, 44, 8, 943);
+    			add_location(thead, file$5, 43, 4, 926);
+    			add_location(b0, file$5, 52, 16, 1102);
     			attr_dev(td0, "class", "svelte-kqzxl8");
-    			add_location(td0, file$5, 51, 12, 1088);
-    			add_location(b1, file$5, 55, 16, 1187);
+    			add_location(td0, file$5, 51, 12, 1080);
+    			add_location(b1, file$5, 55, 16, 1188);
     			attr_dev(td1, "class", "svelte-kqzxl8");
-    			add_location(td1, file$5, 54, 12, 1165);
+    			add_location(td1, file$5, 54, 12, 1166);
     			attr_dev(tr1, "class", "svelte-kqzxl8");
-    			add_location(tr1, file$5, 50, 8, 1070);
-    			add_location(tbody, file$5, 49, 4, 1053);
+    			add_location(tr1, file$5, 50, 8, 1062);
+    			add_location(tbody, file$5, 49, 4, 1045);
     			attr_dev(table, "class", "svelte-kqzxl8");
-    			add_location(table, file$5, 42, 0, 916);
-    			add_location(hr2, file$5, 60, 0, 1288);
+    			add_location(table, file$5, 42, 0, 913);
+    			add_location(hr2, file$5, 60, 0, 1289);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3483,7 +3490,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			h30 = element("h3");
-    			h30.textContent = "Regression";
+    			h30.textContent = "Regresi";
     			t1 = space();
     			div0 = element("div");
     			p0 = element("p");
@@ -3508,7 +3515,7 @@ var app = (function () {
     			hr0 = element("hr");
     			t13 = space();
     			h31 = element("h3");
-    			h31.textContent = "Y Regression";
+    			h31.textContent = "Persamaan Regresi";
     			t15 = space();
     			create_component(display0.$$.fragment);
     			t16 = space();
@@ -3518,21 +3525,21 @@ var app = (function () {
     			t18 = space();
     			hr1 = element("hr");
     			add_location(h30, file$4, 14, 0, 423);
-    			add_location(p0, file$4, 17, 4, 476);
-    			add_location(i0, file$4, 21, 15, 568);
-    			add_location(p1, file$4, 20, 4, 548);
+    			add_location(p0, file$4, 17, 4, 473);
+    			add_location(i0, file$4, 21, 15, 565);
+    			add_location(p1, file$4, 20, 4, 545);
     			attr_dev(div0, "class", "scrollable");
-    			add_location(div0, file$4, 15, 0, 444);
-    			add_location(br0, file$4, 24, 0, 598);
-    			add_location(p2, file$4, 27, 4, 636);
-    			add_location(i1, file$4, 31, 14, 706);
-    			add_location(p3, file$4, 30, 4, 687);
+    			add_location(div0, file$4, 15, 0, 441);
+    			add_location(br0, file$4, 24, 0, 595);
+    			add_location(p2, file$4, 27, 4, 633);
+    			add_location(i1, file$4, 31, 14, 703);
+    			add_location(p3, file$4, 30, 4, 684);
     			attr_dev(div1, "class", "scrollable");
-    			add_location(div1, file$4, 25, 0, 604);
-    			add_location(hr0, file$4, 34, 0, 736);
-    			add_location(h31, file$4, 36, 0, 744);
-    			add_location(br1, file$4, 38, 0, 853);
-    			add_location(hr1, file$4, 40, 0, 935);
+    			add_location(div1, file$4, 25, 0, 601);
+    			add_location(hr0, file$4, 34, 0, 733);
+    			add_location(h31, file$4, 36, 0, 741);
+    			add_location(br1, file$4, 38, 0, 855);
+    			add_location(hr1, file$4, 40, 0, 937);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3725,7 +3732,7 @@ var app = (function () {
     			t1 = text("%");
     			option.__value = /*pr*/ ctx[10];
     			option.value = option.__value;
-    			add_location(option, file$3, 17, 8, 528);
+    			add_location(option, file$3, 17, 8, 534);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -3785,11 +3792,11 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			h30 = element("h3");
-    			h30.textContent = "T Comparison";
+    			h30.textContent = "Perbandingan T";
     			t1 = space();
     			div0 = element("div");
     			label = element("label");
-    			label.textContent = "Percentage";
+    			label.textContent = "Alpha";
     			t3 = space();
     			select = element("select");
 
@@ -3806,34 +3813,34 @@ var app = (function () {
     			hr0 = element("hr");
     			t7 = space();
     			h31 = element("h3");
-    			h31.textContent = "Conclusion";
+    			h31.textContent = "Kesimpulan";
     			t9 = space();
     			div1 = element("div");
     			h5 = element("h5");
     			t10 = text(/*c*/ ctx[4]);
     			t11 = space();
     			hr1 = element("hr");
-    			add_location(h30, file$3, 12, 0, 367);
+    			add_location(h30, file$3, 12, 0, 376);
     			attr_dev(label, "for", "prct");
     			attr_dev(label, "class", "svelte-1rxq87k");
-    			add_location(label, file$3, 14, 4, 413);
+    			add_location(label, file$3, 14, 4, 424);
     			attr_dev(select, "id", "prct");
     			attr_dev(select, "class", "svelte-1rxq87k");
     			if (/*p*/ ctx[0] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[9].call(select));
-    			add_location(select, file$3, 15, 4, 455);
+    			add_location(select, file$3, 15, 4, 461);
     			attr_dev(div0, "class", "flx svelte-1rxq87k");
-    			add_location(div0, file$3, 13, 0, 390);
+    			add_location(div0, file$3, 13, 0, 401);
     			html_tag.a = i;
     			attr_dev(i, "class", "svelte-1rxq87k");
-    			toggle_class(i, "no", /*s*/ ctx[3] == 'No');
-    			add_location(i, file$3, 21, 66, 672);
-    			add_location(h4, file$3, 21, 0, 606);
-    			add_location(hr0, file$3, 22, 0, 708);
-    			add_location(h31, file$3, 24, 0, 716);
-    			add_location(h5, file$3, 26, 4, 767);
+    			toggle_class(i, "no", /*s*/ ctx[3] != 'Ya');
+    			add_location(i, file$3, 21, 66, 678);
+    			add_location(h4, file$3, 21, 0, 612);
+    			add_location(hr0, file$3, 22, 0, 714);
+    			add_location(h31, file$3, 24, 0, 722);
+    			add_location(h5, file$3, 26, 4, 773);
     			attr_dev(div1, "class", "scrollable");
-    			add_location(div1, file$3, 25, 0, 737);
-    			add_location(hr1, file$3, 28, 0, 789);
+    			add_location(div1, file$3, 25, 0, 743);
+    			add_location(hr1, file$3, 28, 0, 795);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3905,7 +3912,7 @@ var app = (function () {
     			if (dirty & /*s*/ 8) set_data_dev(t5, /*s*/ ctx[3]);
 
     			if (dirty & /*s*/ 8) {
-    				toggle_class(i, "no", /*s*/ ctx[3] == 'No');
+    				toggle_class(i, "no", /*s*/ ctx[3] != 'Ya');
     			}
 
     			if (dirty & /*c*/ 16) set_data_dev(t10, /*c*/ ctx[4]);
@@ -3959,9 +3966,9 @@ var app = (function () {
     	component_subscribe($$self, RESULT, $$value => $$invalidate(8, $RESULT = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('T', slots, []);
-    	let p = 5;
+    	let { p = 2 } = $$props;
     	const prct = [25, 20, 15, 10, 5, 2.5, 2, 1, 0.5];
-    	const writable_props = [];
+    	const writable_props = ['p'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<T> was created with unknown prop '${key}'`);
@@ -3972,6 +3979,10 @@ var app = (function () {
     		$$invalidate(0, p);
     		$$invalidate(5, prct);
     	}
+
+    	$$self.$$set = $$props => {
+    		if ('p' in $$props) $$invalidate(0, p = $$props.p);
+    	};
 
     	$$self.$capture_state = () => ({
     		FORMULA,
@@ -4015,7 +4026,7 @@ var app = (function () {
     		}
 
     		if ($$self.$$.dirty & /*tc, tt*/ 6) {
-    			$$invalidate(3, s = tc >= tt ? 'Yes' : 'No');
+    			$$invalidate(3, s = tc >= tt ? 'Ya' : 'Tidak');
     		}
     	};
 
@@ -4025,7 +4036,7 @@ var app = (function () {
     class T extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {});
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { p: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -4033,6 +4044,14 @@ var app = (function () {
     			options,
     			id: create_fragment$3.name
     		});
+    	}
+
+    	get p() {
+    		throw new Error("<T>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set p(value) {
+    		throw new Error("<T>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -17104,14 +17123,14 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			h3 = element("h3");
-    			h3.textContent = "Chart";
+    			h3.textContent = "Graph";
     			t1 = space();
     			canvas = element("canvas");
     			t2 = space();
     			br = element("br");
-    			add_location(h3, file$2, 47, 0, 833);
-    			add_location(canvas, file$2, 48, 0, 849);
-    			add_location(br, file$2, 49, 0, 884);
+    			add_location(h3, file$2, 59, 0, 1092);
+    			add_location(canvas, file$2, 60, 0, 1108);
+    			add_location(br, file$2, 61, 0, 1143);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -17146,6 +17165,12 @@ var app = (function () {
     	});
 
     	return block;
+    }
+
+    function compare(a, b) {
+    	if (a.x < b.x) return -1;
+    	if (a.x > b.x) return 1;
+    	return 0;
     }
 
     function instance$2($$self, $$props, $$invalidate) {
@@ -17189,6 +17214,7 @@ var app = (function () {
     		ch,
     		c,
     		update,
+    		compare,
     		config,
     		data,
     		$CHART,
@@ -17214,15 +17240,21 @@ var app = (function () {
     						label: 'Y',
     						data: $INPUTDATA.x_mutated.map((v, i) => {
     							return { x: v, y: $INPUTDATA.y_mutated[i] };
-    						}),
-    						backgroundColor: 'rgb(255, 99, 132)'
+    						}).sort(compare),
+    						backgroundColor: 'rgb(255, 99, 132)',
+    						showLine: true,
+    						borderColor: 'red',
+    						borderWidth: 1
     					},
     					{
     						label: 'Predicted Y',
     						data: $INPUTDATA.x_mutated.map((v, i) => {
     							return { x: v, y: $CHART[i] };
-    						}),
-    						backgroundColor: '#2272ff'
+    						}).sort(compare),
+    						backgroundColor: '#2272ff',
+    						showLine: true,
+    						borderColor: 'blue',
+    						borderWidth: 1
     					}
     				]
     			});
@@ -17430,13 +17462,17 @@ var app = (function () {
     	let regression;
     	let t9;
     	let chart;
+    	let t10;
+    	let footer;
+    	let a;
     	let current;
     	header = new Header({ $$inline: true });
 
     	input0 = new Input({
     			props: {
     				label: "x",
-    				inp: "37, 29, 32, 35, 25, 33, 31, 37, 28, 35, 31, 33, 28, 38, 30"
+    				variable: "Postur Tubuh Manusia",
+    				inp: "38, 31, 35, 27, 31, 37, 35, 31, 31, 29, 28, 28, 38, 30, 39, 31, 30, 32, 35, 25, 33, 31, 39, 28, 35, 31, 33, 28, 37, 36"
     			},
     			$$inline: true
     		});
@@ -17444,24 +17480,25 @@ var app = (function () {
     	input1 = new Input({
     			props: {
     				label: "y",
-    				inp: "78, 58, 69, 72, 51, 71, 73, 79, 56, 74, 66, 70, 56, 81, 70"
+    				variable: "Tingkat Kelelahan Pekerja",
+    				inp: "68, 69, 72, 51, 71, 73, 88, 56, 74, 66, 70, 56, 81, 70, 79, 75, 58, 69, 72, 51, 71, 73, 84, 56, 74, 66, 70, 56, 81, 80"
     			},
     			$$inline: true
     		});
 
-    	mutator = new Mutator({ props: { val: 0 }, $$inline: true });
+    	mutator = new Mutator({ props: { val: 8 }, $$inline: true });
 
     	statement = new Statement({
     			props: {
-    				ha: "Ada hubungan signifikan",
-    				ho: "Tidak ada hubungan signifikan"
+    				ho: "Ada Hubungan Postur Tubuh Manusia Terhadap Tingkat Kelelahan Pekerja.",
+    				ha: "Tidak Ada Hubungan Postur Tubuh Manusia Terhadap Tingkat Kelelahan Pekerja."
     			},
     			$$inline: true
     		});
 
     	table = new Table({ $$inline: true });
     	correlation = new Correlation({ $$inline: true });
-    	t7 = new T({ $$inline: true });
+    	t7 = new T({ props: { p: 2 }, $$inline: true });
     	regression = new Regression({ $$inline: true });
     	chart = new Chart_1({ $$inline: true });
 
@@ -17487,7 +17524,16 @@ var app = (function () {
     			create_component(regression.$$.fragment);
     			t9 = space();
     			create_component(chart.$$.fragment);
+    			t10 = space();
+    			footer = element("footer");
+    			a = element("a");
+    			a.textContent = "source_code";
     			add_location(main, file, 13, 0, 419);
+    			attr_dev(a, "href", "https://github.com/fmented/statistika2");
+    			attr_dev(a, "class", "svelte-cfg5ln");
+    			add_location(a, file, 31, 1, 1067);
+    			attr_dev(footer, "class", "svelte-cfg5ln");
+    			add_location(footer, file, 30, 0, 1057);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -17513,6 +17559,9 @@ var app = (function () {
     			mount_component(regression, main, null);
     			append_dev(main, t9);
     			mount_component(chart, main, null);
+    			insert_dev(target, t10, anchor);
+    			insert_dev(target, footer, anchor);
+    			append_dev(footer, a);
     			current = true;
     		},
     		p: noop$1,
@@ -17556,6 +17605,8 @@ var app = (function () {
     			destroy_component(t7);
     			destroy_component(regression);
     			destroy_component(chart);
+    			if (detaching) detach_dev(t10);
+    			if (detaching) detach_dev(footer);
     		}
     	};
 
