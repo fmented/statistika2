@@ -6,7 +6,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --host --no-clear",
-    "deploy": "node script/deploy.js"
+    "deploy": "node scripts/deploy.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
