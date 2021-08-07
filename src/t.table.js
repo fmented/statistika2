@@ -457,12 +457,20 @@ const n025 = [
   0.677,
 ];
 
-const percentage = [25, 20, 15, 10, 5, 2.5, 2, 1, 0.5]
+const percentage = [25, 20, 15, 10, 5, 2.5, 2, 1, 0.5];
 
 export const T = {
-    find(n, p){
-        if(!percentage.includes(p)) return 0
-        return this[p][n]
-    },
-    "25":n025,"20":n02,"15":n015,"10":n01, "5":n005, "2.5":n0025, "2":n002, "1":n001, "0.5":n0005
-}
+  find(n, p) {
+    if (!percentage.includes(p)) return 0;
+    return this[p][n];
+  },
+  25: n025,
+  20: n02,
+  15: n015,
+  10: n01,
+  5: n005,
+  2.5: n0025,
+  2: n002,
+  1: n001,
+  0.5: n0005,
+};
